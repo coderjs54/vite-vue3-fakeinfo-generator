@@ -1,0 +1,74 @@
+// ============================================================
+// 主题变量（CSS 自定义属性），亮色为默认，深色通过 html[data-theme='dark'] 切换
+// 注意：此文件会在 main.ts 中只引入一次，避免重复输出
+// ============================================================
+
+:root {
+  color-scheme: light;
+
+  --c-bg: #f3f1ec;
+  --c-surface: #ffffff;
+  --c-surface-muted: #f4f2ee;
+  --c-border: #e7e3db;
+  --c-border-strong: #d6d1c6;
+
+  --c-text-primary: #1f1d1a;
+  --c-text-secondary: #6d685f;
+  --c-text-tertiary: #a6a199;
+
+  --c-accent: #e0b84c;
+  --c-accent-hover: #d0a634;
+  --c-accent-text: #2a2210;
+  --c-accent-soft: #f4d983;
+  --c-accent-glow: rgba(216, 176, 74, 0.35);
+
+  --c-danger: #d8483f;
+  --c-danger-bg: rgba(216, 72, 63, 0.1);
+  --c-mask: rgba(30, 27, 22, 0.52);
+  --c-text-inverse: #ffffff;
+
+  --c-shadow-sm: 0 1px 2px rgba(31, 29, 26, 0.04), 0 6px 20px rgba(31, 29, 26, 0.06);
+  --c-shadow-lg: 0 24px 70px rgba(31, 29, 26, 0.22);
+
+  // 背景光晕
+  --c-glow-one: rgba(224, 184, 76, 0.28);
+  --c-glow-two: rgba(120, 170, 170, 0.18);
+
+  // 卡面展示台的柔光与点阵
+  --c-board-glow: rgba(255, 255, 255, 0.75);
+  --c-board-dot: rgba(31, 29, 26, 0.12);
+}
+
+html[data-theme='dark'] {
+  color-scheme: dark;
+
+  --c-bg: #131311;
+  --c-surface: #1c1b18;
+  --c-surface-muted: #232220;
+  --c-border: #2e2c28;
+  --c-border-strong: #423f38;
+
+  --c-text-primary: #f2efe8;
+  --c-text-secondary: #a9a49a;
+  --c-text-tertiary: #77736a;
+
+  --c-accent: #e2ba52;
+  --c-accent-hover: #f0cd6c;
+  --c-accent-text: #241d09;
+  --c-accent-soft: #cba643;
+  --c-accent-glow: rgba(226, 186, 82, 0.28);
+
+  --c-danger: #ef6459;
+  --c-danger-bg: rgba(239, 100, 89, 0.14);
+  --c-mask: rgba(0, 0, 0, 0.66);
+  --c-text-inverse: #ffffff;
+
+  --c-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
+  --c-shadow-lg: 0 24px 70px rgba(0, 0, 0, 0.6);
+
+  --c-glow-one: rgba(224, 184, 76, 0.16);
+  --c-glow-two: rgba(90, 150, 150, 0.14);
+
+  --c-board-glow: rgba(255, 255, 255, 0.06);
+  --c-board-dot: rgba(255, 255, 255, 0.06);
+}

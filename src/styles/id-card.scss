@@ -1,0 +1,343 @@
+// ============================================================
+// 证件卡面样式（1920 × 1080 之上的 3600 × 2400 设计坐标系）
+// 版式坐标、字号、字距、阴影层次均按底图印刷位置标定，
+// 文字用 background-clip: text + 噪点纹理模拟油墨颗粒，
+// 因此这里的数值是版式常量而非普通间距，改动需同步底图。
+// ============================================================
+
+// 卡面专用字体（取自原站素材，用于还原印刷体）
+@font-face {
+  font-family: 'font_name';
+  src: url('../assets/card/font-name.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'font_born';
+  src: url('../assets/card/font-born.woff2') format('woff2');
+  font-weight: 200;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'font_number';
+  src: url('../assets/card/font-number.woff2') format('woff2');
+  font-weight: 200;
+  font-display: swap;
+}
+
+// 卡面根容器：固定为底图尺寸，内部全部绝对定位
+.id-card {
+  position: relative;
+  width: 3600px;
+  height: 2400px;
+  overflow: hidden;
+  background: #f0f0f0;
+  isolation: isolate;
+  user-select: none;
+}
+
+// 底图（木纹背景 + 卡面印刷图层）
+.id-card-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 3600px;
+  height: 2400px;
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-size: contain;
+}
+
+// ---------------- 正面 ----------------
+
+.id-card-text-name {
+  position: absolute;
+  top: 440px;
+  left: 889px;
+  z-index: 2;
+}
+
+.id-card-text-name p {
+  margin: 0;
+  font-family: 'font_name', sans-serif;
+  font-size: 138px;
+  font-weight: 400;
+  letter-spacing: 80px;
+  white-space: nowrap;
+  text-shadow:
+    1px 0 1px rgba(4, 0, 20, 0.3),
+    -1px 0 1px rgba(4, 0, 20, 0.3),
+    0 -2px 3px rgba(1, 0, 32, 0.4),
+    0 -1px 4px rgba(6, 45, 0, 0.4),
+    0 0 20px rgba(27, 30, 0, 0.8);
+  filter: blur(1px);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.id-card-text-gender {
+  position: absolute;
+  top: 714px;
+  left: 880px;
+  z-index: 2;
+  display: flex;
+  gap: 516px;
+}
+
+.id-card-text-gender p {
+  margin: 0;
+  font-family: 'font_name', sans-serif;
+  font-size: 110px;
+  font-weight: 400;
+  white-space: nowrap;
+  text-shadow:
+    -1px 0 1px rgba(4, 0, 20, 0.4),
+    1px 0 1px rgba(4, 0, 20, 0.4),
+    0 -2px 3px rgba(1, 0, 32, 0.4),
+    0 -1px 4px rgba(6, 45, 0, 0.4),
+    0 0 20px rgba(27, 30, 0, 0.8);
+  filter: blur(1px);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.id-card-text-born {
+  position: absolute;
+  top: 972px;
+  left: 880px;
+  z-index: 2;
+  display: flex;
+  gap: 240px;
+}
+
+.id-card-text-born p {
+  margin: 0;
+  font-family: 'font_born', sans-serif;
+  font-size: 101px;
+  font-weight: 200;
+  letter-spacing: 2px;
+  white-space: nowrap;
+  text-shadow:
+    2px 2px 2px rgba(0, 0, 2, 0.4),
+    2px 1px 2px rgba(2, 0, 25, 0.4),
+    0 -2px 3px rgba(1, 0, 32, 0.5),
+    0 -1px 4px rgba(6, 45, 0, 0.4),
+    0 0 20px rgba(27, 30, 0, 1);
+  filter: blur(1px);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.id-card-text-born-month {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 60px;
+  height: 100px;
+}
+
+.id-card-text-address {
+  position: absolute;
+  top: 1190px;
+  left: 877px;
+  z-index: 2;
+  display: flex;
+  width: 1290px;
+  height: 650px;
+}
+
+.id-card-text-address span {
+  max-width: 100%;
+  font-family: 'font_name', sans-serif;
+  font-size: 113px;
+  line-height: 1.45;
+  letter-spacing: 0;
+  white-space: normal;
+  text-shadow:
+    0 0 1px rgba(0, 3, 14, 0.3),
+    0 -1px 2px rgba(2, 0, 25, 0.3),
+    0 -1px 3px rgba(1, 0, 32, 0.4),
+    0 -1px 4px rgba(6, 45, 0, 0.4),
+    0 0 16px rgba(19, 21, 0, 0.8);
+  filter: blur(1px);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// 住址中的数字、字母、符号用另一套字体，避免等宽偏移
+.id-card-text-address .latin {
+  font-family: 'font_born', sans-serif;
+  font-size: 108px;
+  vertical-align: -10px;
+}
+
+.id-card-text-address .latin.hyphen {
+  position: relative;
+  left: -12px;
+  padding-left: 4px;
+  padding-right: 8px;
+  letter-spacing: 22px;
+  vertical-align: 0;
+}
+
+.id-card-text-number {
+  position: absolute;
+  top: 1837px;
+  left: 1366px;
+  z-index: 2;
+  display: flex;
+}
+
+.id-card-text-number p {
+  margin: 0;
+  font-family: 'font_number', sans-serif;
+  font-size: 128px;
+  font-weight: 200;
+  letter-spacing: 18px;
+  text-shadow:
+    0 0 2px rgba(0, 1, 12, 0.2),
+    0 0 2px rgba(2, 0, 25, 0.2),
+    0 0 3px rgba(1, 0, 32, 0.5),
+    0 0 4px rgba(6, 45, 0, 0.4),
+    0 0 24px rgba(19, 21, 0, 0.8);
+  filter: blur(1px);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// 头像区：底图留出的证件照位置
+.id-card-head {
+  position: absolute;
+  top: 456px;
+  left: 2224px;
+  z-index: 3;
+  width: 960px;
+  height: 1200px;
+  opacity: 0.7;
+}
+
+.id-card-head-img {
+  width: 960px;
+  height: 1200px;
+  // 左右与底部做柔化过渡，避免头像边缘像贴纸一样生硬
+  mask-image:
+    linear-gradient(
+      to right,
+      transparent 0,
+      #000 10px,
+      #000 calc(100% - 8px),
+      transparent 100%
+    ),
+    linear-gradient(to bottom, #000 0, #000 calc(100% - 12px), transparent 100%);
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
+  filter: blur(1px) contrast(1);
+}
+
+.id-card-head-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+// ---------------- 背面 ----------------
+
+.id-card-text-office {
+  position: absolute;
+  top: 1600px;
+  left: 1546px;
+  z-index: 2;
+}
+
+.id-card-text-office p {
+  margin: 0;
+  font-family: 'font_name', sans-serif;
+  font-size: 110px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  text-shadow:
+    0 0 0 rgba(33, 33, 37, 0.3),
+    0 0 1px rgba(4, 0, 20, 0.3),
+    0 -1px 3px rgba(1, 0, 32, 0.4),
+    0 -1px 4px rgba(0, 6, 45, 0.4),
+    0 0 15px rgba(27, 30, 0, 0.8);
+  filter: blur(1px);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.id-card-text-period {
+  position: absolute;
+  top: 1876px;
+  left: 1544px;
+  z-index: 2;
+  display: flex;
+  gap: 12px;
+}
+
+.id-card-text-period-value,
+.id-card-text-period-hyphen {
+  margin: 0;
+  font-family: 'font_born', sans-serif;
+  font-size: 108px;
+  font-weight: 200;
+  letter-spacing: -2px;
+  white-space: nowrap;
+  text-shadow:
+    0 1px 1px rgba(1, 0, 18, 0.2),
+    0 1px 2px rgba(2, 0, 25, 0.4),
+    0 -1px 3px rgba(1, 0, 32, 0.5),
+    0 -1px 4px rgba(0, 9, 45, 0.3),
+    0 0 15px rgba(27, 30, 0, 1);
+  filter: blur(1px);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.id-card-text-period-hyphen {
+  position: relative;
+  left: -4px;
+  padding-left: 4px;
+  padding-right: 18px;
+}
+
+.id-card-text-period-long {
+  position: relative;
+  top: -24px;
+  margin: 0;
+  font-family: 'font_name', sans-serif;
+  font-size: 108px;
+  font-weight: 200;
+  letter-spacing: 8px;
+  white-space: nowrap;
+  text-shadow:
+    0 1px 1px rgba(1, 0, 18, 0.2),
+    0 1px 2px rgba(2, 0, 25, 0.4),
+    0 -1px 3px rgba(1, 0, 32, 0.5),
+    0 -1px 4px rgba(0, 9, 45, 0.3),
+    0 0 15px rgba(27, 30, 0, 1);
+  filter: blur(1px);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// ---------------- 测试水印 ----------------
+
+.id-card-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 4;
+  width: 2600px;
+  transform: translate(-50%, -50%) rotate(-24deg);
+  font-family: 'font_name', sans-serif;
+  font-size: 190px;
+  letter-spacing: 24px;
+  text-align: center;
+  color: rgba(214, 76, 76, 0.24);
+  pointer-events: none;
+}
