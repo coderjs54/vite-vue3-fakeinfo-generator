@@ -3,7 +3,10 @@ import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ command }) => ({
+  // GitHub Pages 的项目站点运行在 https://<user>.github.io/<repo>/ 子路径下，
+  // 构建时统一用相对路径，仓库改名或换自定义域名都不用改配置
+  base: command === 'build' ? './' : '/',
   plugins: [vue()],
   resolve: {
     alias: {
@@ -18,4 +21,9 @@ export default defineConfig({
       },
     },
   },
-})
+  build: {
+    // 单页应用只有一份入口，卡面图片与字体都由 Vite 处理成独立资源
+    outDir: 'dist',
+    assetsInlineLimit: 4096,
+  },
+}))

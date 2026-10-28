@@ -2,7 +2,7 @@
 
 **Vue 3 · TypeScript · Vite** ｜ 随机虚构资料 + 真实卡面排版，一键导出身份证正反面图片
 
-[功能特性](#功能特性) · [界面预览](#界面预览) · [快速开始](#快速开始) · [目录结构](#目录结构) · [实现说明](#实现说明)
+[功能特性](#功能特性) · [界面预览](#界面预览) · [快速开始](#快速开始) · [部署到 GitHub Pages](#部署到-github-pages) · [目录结构](#目录结构) · [实现说明](#实现说明)
 
 > **⚠️ 使用声明**
 >
@@ -55,10 +55,35 @@ npm run preview
 **环境要求**：Node.js 20+，现代浏览器（Chrome / Edge 最佳）。
 卡面文字使用 `background-clip: text`、头像使用 `mask-composite`，导出依赖 `html-to-image` 的 SVG foreignObject 渲染。
 
+## 部署到 GitHub Pages
+
+仓库内置 `.github/workflows/deploy.yml`，推送到 `main` 即自动构建并发布。
+
+首次部署需要在仓库设置里做一步：
+
+1. 打开 **Settings → Pages → Build and deployment**；
+2. 把 **Source** 选成 **GitHub Actions**（不要选 Deploy from a branch）。
+
+之后每次推送 `main`，或在 **Actions** 页面手动运行 **Deploy to GitHub Pages** 即可。访问地址为：
+
+```
+https://<用户名>.github.io/<仓库名>/
+```
+
+工作流要点：
+
+- Node 22 + `npm ci`，先执行 `npm run build`（内置 `vue-tsc` 类型检查，类型错误会中断部署）；
+- `dist` 由 `actions/upload-pages-artifact` 上传，再由 `actions/deploy-pages` 发布；
+- `vite.config.ts` 在构建时使用 `base: './'`（相对路径），仓库改名、换成 `*.github.io` 站点或绑定自定义域名都无需改配置；
+- 同一时间只保留一个部署任务，新提交会自动取消进行中的旧任务。
+
+> 若部署后页面空白，多半是 Pages 的 Source 仍是 “Deploy from a branch”，改成 GitHub Actions 后重新运行工作流即可。
+
 ## 目录结构
 
 ```
 .
+├── .github/workflows/       # GitHub Actions 部署工作流（deploy.yml）
 ├── docs/                    # README 用图
 ├── src/
 │   ├── assets/card/         # 卡面底图、预设头像、印刷字体、噪点纹理
